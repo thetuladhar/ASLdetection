@@ -1,0 +1,18 @@
+def plotLandmark(LandmarkIndex):
+    try:
+        landmark = results.multi_face_landmarks[0].landmark[LandmarkIndex]
+        xland = landmark.x
+        yland = landmark.y
+        #print("x",xland,"\ty",yland)
+    except:
+        pass
+        #beyond frame
+        xland = 0
+        yland = 0
+
+    #Normalize for plotting
+    xnorm = int(xland * image.shape[1])
+    ynorm = int(yland * image.shape[0])
+    #DRAW
+    cv2.circle(image, (xnorm, ynorm), radius=1, color=(225, 0, 255), thickness=2)
+        cv2.putText(image,str(LandmarkIndex),((xnorm),ynorm),cv2.FONT_HERSHEY_DUPLEX,.5,(120, 240, 55),1)
